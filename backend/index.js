@@ -5,6 +5,9 @@ import methodOverride from "method-override"
 import {BaseError} from "./config/error.js"
 import {status} from "./config/responseStatus.js"
 import {response} from "./config/response.js"
+import {connectRouter} from "./src/route/connectRoute.js"
+import { specs } from './config/swagger.js';
+import SwaggerUi from 'swagger-ui-express';
 
 const app = express()
 const port = 8080
@@ -19,9 +22,13 @@ app.use(methodOverride());
 
 app.use(cors());
 
+app.use('/api-docs', SwaggerUi.serve, SwaggerUi.setup(specs));
+
 app.get('/', function (req, res) {
     res.send('Hello World')
 })
+
+app.use('/connect', connectRouter);
 
 app.use((req, res, next) => {
     const err = new BaseError(status.NOT_FOUND);
