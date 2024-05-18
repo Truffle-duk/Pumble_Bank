@@ -8,7 +8,7 @@ export const pool = mysql.createPool({
     user: 'root',
     port: 3306,
     database: 'pumble_bank',
-    password: 'root',
+    password: '',
     waitForConnections: true,
     // Pool에 획득할 수 있는 connection이 없을 때,
     // true면 요청을 queue에 넣고 connection을 사용할 수 있게 되면 요청을 실행하며, false이면 즉시 오류를 내보내고 다시 요청

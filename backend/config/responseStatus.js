@@ -14,4 +14,9 @@ export const status = {
     ACCOUNT_NOT_FOUND: {status: StatusCodes.BAD_REQUEST, "isSuccess": false, "code": "Connect4003", "message": "존재하지 않는 계좌입니다."},
     CONNECT_SOMETHING_WRONG: {status: StatusCodes.BAD_REQUEST, "isSuccess": false, "code": "Connect4004", "message": "Pumble과의 연결 과정에서 문제가 발생했습니다."},
     ACCOUNT_ALREADY_MAPPED: {status: StatusCodes.BAD_REQUEST, "isSuccess": false, "code": "Connect4005", "message": "이미 연동된 계좌입니다."},
+
+    // transaction
+    TRANSACTION_INPUT_EMPTY: {status: StatusCodes.BAD_REQUEST, "isSuccess": false, "code": "Transaction4001", "message": "거래에 필요한 입력값이 비었습니다."},
+    RECORD_SOMETHING_WRONG: {status: StatusCodes.BAD_REQUEST, "isSuccess": false, "code": "Transaction4002", "message": "거래 기록 과정에서 문제가 발생했습니다."},
+    LACK_OF_BALANCE: {status: StatusCodes.BAD_REQUEST, "isSuccess": false, "code": "Transaction4003", "message": "잔액이 부족합니다."},
 }

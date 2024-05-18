@@ -8,6 +8,7 @@ import {response} from "./config/response.js"
 import {connectRouter} from "./src/route/connectRoute.js"
 import { specs } from './config/swagger.js';
 import SwaggerUi from 'swagger-ui-express';
+import {transactionRouter} from "./src/route/transactionRoute.js";
 
 const app = express()
 const port = 8080
@@ -28,7 +29,9 @@ app.get('/', function (req, res) {
     res.send('Hello World')
 })
 
+
 app.use('/connect', connectRouter);
+app.use('/transaction', transactionRouter);
 
 app.use((req, res, next) => {
     const err = new BaseError(status.NOT_FOUND);
