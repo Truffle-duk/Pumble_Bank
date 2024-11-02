@@ -1,8 +1,10 @@
 import {BaseError} from "../../config/error.js";
 import {status} from "../../config/responseStatus.js";
 import {getBalance, getRecords, postRecord, selectAccountByUUID} from "../model/transactionModel.js";
+import {recordWithdrawal, recordDeposit} from "../blockchain/blockchainFunction.js";
 
 export const record = async (body) => {
+    let amountVal = body.amount
     if(checkNullOrEmpty(body) === false) {
         throw new BaseError(status.TRANSACTION_INPUT_EMPTY);
     }
@@ -23,20 +25,26 @@ export const record = async (body) => {
         if (getBalanceData < body.amount) {
             throw new BaseError(status.LACK_OF_BALANCE)
         } else {
-            body.amount = body.amount * -1
+            amountVal = amountVal * -1
         }
     }
 
     // 3. 거래 내역 입력
     const postRecordData = await postRecord({
         'counterparty': body.counterparty,
-        'amount': body.amount,
+        'amount': amountVal,
         'type': body.type,
+        'description': body.description,
         'uuid': body.uuid
     })
 
     if (postRecordData === 0) {
-        // TODO: 4. 블록에 거래 내역 기록
+        // 블록에 거래 내역 기록
+        if (body.type === 'outcome') {
+            await recordWithdrawal(body.uuid, body.amount, body.counterparty, body.description)
+        } else if (body.type === 'income') {
+            await recordDeposit(body.uuid, body.amount, body.counterparty, body.description)
+        }
         return 0
     } else {
         throw new BaseError(status.RECORD_SOMETHING_WRONG)
