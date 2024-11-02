@@ -2,6 +2,7 @@ import { BaseError } from "../../config/error.js";
 import { status } from "../../config/responseStatus.js";
 import {validateOwner, findAccount, insertConnectInfo, findMappingByAccount} from "../model/connectModel.js";
 import {connectPumbleDTO, validateOwnerDTO} from "../dto/connectDTO.js";
+import {createGroupF} from "../blockchain/blockchainFunction.js";
 
 export const validateUser = async (body) => {
     if (body.owner === "" || body.owner === null || body.account === "" || body.account === null) {
@@ -41,7 +42,6 @@ export const connectPumbleGroup = async (body) => {
         account: body.account
     })
 
-    console.log(checkMappingExist)
     if (checkMappingExist === -1) {
         throw new BaseError(status.ACCOUNT_ALREADY_MAPPED)
     }
@@ -51,7 +51,10 @@ export const connectPumbleGroup = async (body) => {
         uuid: body.connectUUID
     })
 
+    console.log(connectPumbleData)
+
     if (connectPumbleData === 0) {
+        await createGroupF(body.connectUUID, '')
         return connectPumbleDTO()
     } else {
         throw new BaseError(status.CONNECT_SOMETHING_WRONG)

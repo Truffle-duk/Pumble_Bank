@@ -35,7 +35,7 @@ export const getBalance = async (data) => {
 export const postRecord = async (data) => {
     try {
         const conn = await pool.getConnection();
-        const [confirm] = await pool.query(insertRecord, [data.counterparty, data.amount, data.type, data.uuid]);
+        const [confirm] = await pool.query(insertRecord, [data.counterparty, data.amount, data.type, data.description, data.uuid]);
 
         if (confirm.affectedRows === 1) {
             conn.release();
@@ -45,6 +45,7 @@ export const postRecord = async (data) => {
         }
 
     } catch (err) {
+        console.log(err)
         throw new BaseError(status.DB_ERROR)
     }
 }

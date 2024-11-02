@@ -11,7 +11,7 @@ import SwaggerUi from 'swagger-ui-express';
 import {transactionRouter} from "./src/route/transactionRoute.js";
 
 const app = express()
-const port = 8080
+const port = 9090
 
 app.use(compression());
 

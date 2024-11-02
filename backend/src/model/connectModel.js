@@ -9,6 +9,7 @@ export const findAccount = async (data) => {
     try{
         const conn = await pool.getConnection();
         const [confirm] = await pool.query(selectAccountSql, data.account);
+        console.log(confirm)
 
         if(confirm[0].isExistAccount === 0){
             conn.release();
@@ -47,7 +48,7 @@ export const insertConnectInfo = async (data) => {
 
         const [confirm] = await pool.query(insertMappingInfoSql, [data.uuid, data.account]);
 
-        if (confirm[0].affectedRows === 1) {
+        if (confirm.affectedRows === 1) {
             conn.release();
             return 0;
         } else {
