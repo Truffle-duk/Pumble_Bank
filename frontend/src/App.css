@@ -1,0 +1,30 @@
+.App {
+  display: flex;
+  height: 800px;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-container {
+  width: 40%;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  margin: 40px 0 0 0;
+  gap: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+}
+
+.spacer {
+  width: 30px;
+}
+
+.header-image {
+  width: 300px;
+}

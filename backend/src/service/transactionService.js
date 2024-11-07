@@ -4,6 +4,7 @@ import {getBalance, getRecords, postRecord, selectAccountByUUID} from "../model/
 import {recordWithdrawal, recordDeposit} from "../blockchain/blockchainFunction.js";
 
 export const record = async (body) => {
+    console.log(body)
     let amountVal = body.amount
     if(checkNullOrEmpty(body) === false) {
         throw new BaseError(status.TRANSACTION_INPUT_EMPTY);
