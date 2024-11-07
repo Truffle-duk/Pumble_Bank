@@ -10,6 +10,6 @@ export const recordTransaction = async (req, res, next) => {
 
 export const retrieveTransactions = async (req, res, next) => {
     console.log("금융 거래 내역 조회를 요청하였습니다.")
-
+    console.log(req.body)
     res.send(response(status.SUCCESS, await retrieve(req.body)))
 }
